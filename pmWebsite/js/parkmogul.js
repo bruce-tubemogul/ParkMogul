@@ -41,16 +41,20 @@ var menu = flight.component(function() {
 
 // Info Popup
 var info = flight.component(function() {
+        this.populateAvailableSpaces = function(availableSpaces) {
+            $('.info .available_spaces').html(availableSpaces);
+            $('.info').removeClass("spaces-available").removeClass("few-spaces-left").removeClass("no-spaces");
+            if (availableSpaces == 0) $('.info').addClass("no-spaces-left");
+            if (availableSpaces >= 1 && availableSpaces <= 3) $('.info').addClass("few-spaces-left");
+            if (availableSpaces >=4) $('.info').addClass("spaces-available");
+        };
         this.getAvailableSpaces = function(parkingLotId) {
+                var scope = this;
                 $.ajax({
                         url: global.ajax_url+"get-available-spots",
                         success: function(res) {
                                 var availableSpaces = parseInt(res);
-                                $('.info .available_spaces').html(availableSpaces);
-                                $('.info').removeClass("spaces-available").removeClass("few-spaces-left").removeClass("no-spaces");
-                                if (availableSpaces == 0) $('.info').addClass("no-spaces-left");
-                                if (availableSpaces >= 1 && availableSpaces <= 3) $('.info').addClass("few-spaces-left");
-                                if (availableSpaces >=4) $('.info').addClass("spaces-available");
+                                scope.populateAvailableSpaces(availableSpaces);
                         }
                 });
         };
