@@ -1,3 +1,13 @@
+var global = {};
+
+global.ajax_url = "http://ui-8408.ryanyu.sandbox.tubemogul.info/parkmogul/";
+
+// activate real time (refresh) requests?
+global.real_time_on = false;
+
+// ms between api requests
+global.real_time_interval = 3000;
+
 // Each Menu Item
 var menuItem = flight.component(function() {
         this.after('initialize', function() {
@@ -8,11 +18,6 @@ var menuItem = flight.component(function() {
                 });
         });
 });
-
-var global = {};
-global.ajax_url = "http://ui-8408.ryanyu.sandbox.tubemogul.info/parkmogul/";
-global.real_time_on = false;
-global.real_time_interval = 3000;
 
 // Menu
 var menu = flight.component(function() {
