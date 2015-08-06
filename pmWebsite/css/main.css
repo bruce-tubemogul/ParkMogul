@@ -43,6 +43,7 @@ body {
         font-size: 6rem;
 }
 
+/* Info Colors */
 .info.spaces-available {
         background-color: #ADEBAD;
 }
@@ -58,31 +59,33 @@ body {
 @media only screen
 and (min-device-width : 320px)
 and (max-device-width : 480px) {
-/* Styles */
-.menu,.info {
-width: 80% !important;
-}
-.content {
-margin-top: inherit;
-}
-body {
-overflow: auto;
-}
+
+    .menu,.info {
+        width: 80% !important;
+    }
+    .content {
+        margin-top: inherit;
+    }
+    body {
+        overflow: auto;
+    }
 }
 
 @media only screen
 and (min-device-width : 320px)
 and (max-device-width : 480px)
 and (orientation: portrait) {
-/* Styles */
-.menu,.info {
-width: 80% !important;
-}
-.content {
-margin-top: 50%;
-}
+
+    .menu,.info {
+        width: 80% !important;
+    }
+    .content {
+        margin-top: 50%;
+    }
+
 }
 
+/* Desktop Media Query */
 @media screen
   and (min-device-width: 1200px)
   and (max-device-width: 1600px)

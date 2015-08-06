@@ -1,11 +1,4 @@
-var mockData = {};
-mockData.parkingLots = [
-        {"parkingLotId": 1, "parkingLotName": "Main"},
-        {"parkingLotId": 2, "parkingLotName": "Spur"},
-        {"parkingLotId": 3, "parkingLotName": "Winterfell"},
-        {"parkingLotId": 4, "parkingLotName": "Gate"}];
-mockData.availableSpaces = {"availableSpaces": 10};
-
+// Each Menu Item
 var menuItem = flight.component(function() {
         this.after('initialize', function() {
                 this.on("click", function() {
@@ -16,6 +9,7 @@ var menuItem = flight.component(function() {
         });
 });
 
+// Menu
 var menu = flight.component(function() {
         this.show = function() {
                 $('.menu').removeClass("hidden");
@@ -42,6 +36,7 @@ var menu = flight.component(function() {
         });
 });
 
+// Info Popup
 var info = flight.component(function() {
         this.getAvailableSpaces = function(parkingLotId) {
                 availableSpaces = parseInt(mockData.availableSpaces.availableSpaces);
@@ -74,9 +69,9 @@ var info = flight.component(function() {
         });
 });
 
+// Start up initialization.
 $(document).ready(function() {
         menu.attachTo(".menu");
         info.attachTo(".info");
-                menuItem.attachTo('.menu div');
-
+        menuItem.attachTo('.menu div');
 });
