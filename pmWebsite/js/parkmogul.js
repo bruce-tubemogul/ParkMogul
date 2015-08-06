@@ -45,7 +45,7 @@ var menu = flight.component(function() {
 var info = flight.component(function() {
         this.populateAvailableSpaces = function(availableSpaces) {
             $('.info .available_spaces').html(availableSpaces);
-            $('.info').removeClass("spaces-available").removeClass("few-spaces-left").removeClass("no-spaces");
+            $('.info').removeClass("spaces-available").removeClass("few-spaces-left").removeClass("no-spaces-left");
             if (availableSpaces == 0) $('.info').addClass("no-spaces-left");
             if (availableSpaces >= 1 && availableSpaces <= 3) $('.info').addClass("few-spaces-left");
             if (availableSpaces >=4) $('.info').addClass("spaces-available");
