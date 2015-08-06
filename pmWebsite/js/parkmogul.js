@@ -11,6 +11,7 @@ var menuItem = flight.component(function() {
 
 var global = {};
 global.ajax_url = "http://ui-8408.ryanyu.sandbox.tubemogul.info/parkmogul/";
+global.real_time_on = false;
 
 // Menu
 var menu = flight.component(function() {
@@ -63,11 +64,13 @@ var info = flight.component(function() {
                 $('.info').fadeIn(function() {
                         $(this).removeClass("hidden");
                 });
+                global.real_time_on = true;
         };
         this.hide = function() {
                 $('.info').fadeOut(function() {
                         $(this).addClass("hidden");
                 });
+                global.real_time_on = false;
         };
         this.update = function() {
                 this.getAvailableSpaces();
@@ -77,6 +80,7 @@ var info = flight.component(function() {
                 this.on("click", function() { $('.menu').trigger("show"); });
                 this.on("show", this.show);
                 this.on("hide", this.hide);
+                this.on("update", this.update);
         });
 });
 
@@ -85,4 +89,10 @@ $(document).ready(function() {
         menu.attachTo(".menu");
         info.attachTo(".info");
         menuItem.attachTo('.menu div');
+
+        // Real time updates (refresh)
+        window.setInterval(function() {
+                if (global.real_time_on)
+                        $('.info').trigger("update");
+        },3000);
 });
