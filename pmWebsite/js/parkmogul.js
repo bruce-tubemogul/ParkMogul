@@ -9,6 +9,9 @@ var menuItem = flight.component(function() {
         });
 });
 
+var global = {};
+global.ajax_url = "http://ui-8408.ryanyu.sandbox.tubemogul.info/parkmogul/";
+
 // Menu
 var menu = flight.component(function() {
         this.show = function() {
@@ -39,8 +42,17 @@ var menu = flight.component(function() {
 // Info Popup
 var info = flight.component(function() {
         this.getAvailableSpaces = function(parkingLotId) {
-                availableSpaces = parseInt(mockData.availableSpaces.availableSpaces);
-                return availableSpaces;
+                $.ajax({
+                        url: global.ajax_url+"get-available-spots",
+                        success: function(res) {
+                                var availableSpaces = parseInt(res);
+                                $('.info .available_spaces').html(availableSpaces);
+                                $('.info').removeClass("spaces-available").removeClass("few-spaces-left").removeClass("no-spaces");
+                                if (availableSpaces == 0) $('.info').addClass("no-spaces-left");
+                                if (availableSpaces >= 1 && availableSpaces <= 3) $('.info').addClass("few-spaces-left");
+                                if (availableSpaces >=4) $('.info').addClass("spaces-available");
+                        }
+                });
         };
         this.show = function() {
                 this.update();
@@ -54,12 +66,7 @@ var info = flight.component(function() {
                 });
         };
         this.update = function() {
-                var availableSpaces = this.getAvailableSpaces();
-                $('.info .available_spaces').html(availableSpaces);
-                $('.info').removeClass("spaces-available").removeClass("few-spaces-left").removeClass("no-spaces");
-                if (availableSpaces == 0) $('.info').addClass("no-spaces-left");
-                if (availableSpaces >= 1 && availableSpaces <= 3) $('.info').addClass("few-spaces-left");
-                if (availableSpaces >=4) $('.info').addClass("spaces-available");
+                this.getAvailableSpaces();
         }
         this.after('initialize', function() {
                 this.update();
