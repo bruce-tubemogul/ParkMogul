@@ -1,6 +1,6 @@
 var global = {};
 
-global.ajax_url = "http://ui-8408.ryanyu.sandbox.tubemogul.info/parkmogul/";
+global.ajax_url = "http://192.168.66.67:8080/";
 
 // Parking Lot to update.
 global.real_time_parking_lot_id = 0;
@@ -85,9 +85,22 @@ var info = flight.component(function() {
                 var scope = this;
                 $.ajax({
                         url: global.ajax_url+"get-available-spots",
-                        success: function(res) {
-                                var availableSpaces = parseInt(res);
+                        dataType: 'jsonp',
+                            success: function(res) {
+                            console.log("SUCESS");
+                                var availableSpaces = parseInt(response.spots);
+                                console.log(res);
+                                console.log(response);
+                                console.log(availableSpaces);
                                 scope.populateAvailableSpaces(availableSpaces);
+                        },
+                            error: function(e, res) {
+                            console.log("ERROR");
+                            console.log(e);
+                            console.log(res);
+                            console.log(response);
+                            var availableSpaces = parseInt(response.spots);
+                            scope.populateAvailableSpaces(availableSpaces);
                         }
                 });
         };
