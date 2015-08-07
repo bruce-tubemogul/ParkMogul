@@ -11,6 +11,16 @@ global.real_time_on = false;
 // ms between api requests
 global.real_time_interval = 3000;
 
+// Utilities
+var spacesColorChange = function(elem,availableSpaces) {
+    elem.removeClass("spaces-available").removeClass("few-spaces-left").removeClass("no-spaces-left");
+    if (availableSpaces == 0) elem.addClass("no-spaces-left");
+    if (availableSpaces >= 1 && availableSpaces <= 3) elem.addClass("few-spaces-left");
+    if (availableSpaces >=4) elem.addClass("spaces-available");
+
+    return true;
+};
+
 // Each Menu Item
 var menuItem = flight.component(function() {
         this.after('initialize', function() {
@@ -66,12 +76,10 @@ var info = flight.component(function() {
         this.populateAvailableSpaces = function(availableSpaces) {
             $('.info .available_spaces').html(availableSpaces);
             if (global.real_time_parking_lot_id>0) {
-                $('.menu div[data-choice="'+global.real_time_parking_lot_id+'"]').find('.expandable').find('.available_spaces').html(availableSpaces);
+                var menuOptionSelected = $('.menu div[data-choice="'+global.real_time_parking_lot_id+'"]');
+                menuOptionSelected.find('.expandable').find('.available_spaces').html(availableSpaces);
+                spacesColorChange(menuOptionSelected, availableSpaces);
             }
-            $('.info').removeClass("spaces-available").removeClass("few-spaces-left").removeClass("no-spaces-left");
-            if (availableSpaces == 0) $('.info').addClass("no-spaces-left");
-            if (availableSpaces >= 1 && availableSpaces <= 3) $('.info').addClass("few-spaces-left");
-            if (availableSpaces >=4) $('.info').addClass("spaces-available");
         };
         this.getAvailableSpaces = function(parkingLotId) {
                 var scope = this;
