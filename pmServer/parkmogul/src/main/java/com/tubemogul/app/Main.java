@@ -30,8 +30,9 @@ public class Main extends Application<ParkMogulConfiguration> {
     public class CarSeen {
 
         @POST
-        public void carSeen(@QueryParam("plate") String plate) {
+        public int carSeen(@QueryParam("plate") String plate) {
             cars.put(plate);
+            return 0;
         }
     }
 
