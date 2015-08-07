@@ -89,6 +89,7 @@ var info = flight.component(function() {
                             success: function(res) {
                             console.log("SUCESS");
                                 var availableSpaces = parseInt(response.spots);
+                                if ($('.expanded').data("choice") > 1) { availableSpaces = 0; }
                                 console.log(res);
                                 console.log(response);
                                 console.log(availableSpaces);
@@ -100,6 +101,7 @@ var info = flight.component(function() {
                             console.log(res);
                             console.log(response);
                             var availableSpaces = parseInt(response.spots);
+                            if ($('.expanded').data("choice") > 1) { availableSpaces = 0; }
                             scope.populateAvailableSpaces(availableSpaces);
                         }
                 });
