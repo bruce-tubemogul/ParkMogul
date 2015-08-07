@@ -44,15 +44,15 @@ body {
 }
 
 /* Info Colors */
-.info.spaces-available {
+.spaces-available {
         background-color: #ADEBAD;
 }
 
-.info.no-spaces-left {
+.no-spaces-left {
         background-color: #FF8080;
 }
 
-.info.few-spaces-left {
+.few-spaces-left {
         background-color: #FFFFC2;
 }
 
