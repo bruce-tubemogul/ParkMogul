@@ -78,7 +78,10 @@ var info = flight.component(function() {
             if (global.real_time_parking_lot_id>0) {
                 var menuOptionSelected = $('.menu div[data-choice="'+global.real_time_parking_lot_id+'"]');
 
-                if (availableSpaces <= 0) { 
+                if (availableSpaces == -1) {
+                   menuOptionSelected.find('.expandable').find('.info_title').html("");
+                   menuOptionSelected.find('.expandable').find('.available_spaces').html("No Data");
+                } else if (availableSpaces == 0) {
                    menuOptionSelected.find('.expandable').find('.info_title').html("");
                    menuOptionSelected.find('.expandable').find('.available_spaces').html("Lot Full");
                 } else {
@@ -97,7 +100,7 @@ var info = flight.component(function() {
                             success: function(res) {
                             console.log("SUCESS");
                                 var availableSpaces = parseInt(response.spots);
-                                if ($('.expanded').data("choice") > 1) { availableSpaces = 0; }
+                                if ($('.expanded').data("choice") > 1) { availableSpaces = -1; }
                                 console.log(res);
                                 console.log(response);
                                 console.log(availableSpaces);
