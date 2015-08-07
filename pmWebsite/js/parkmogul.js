@@ -77,7 +77,15 @@ var info = flight.component(function() {
             $('.info .available_spaces').html(availableSpaces);
             if (global.real_time_parking_lot_id>0) {
                 var menuOptionSelected = $('.menu div[data-choice="'+global.real_time_parking_lot_id+'"]');
-                menuOptionSelected.find('.expandable').find('.available_spaces').html(availableSpaces);
+
+                if (availableSpaces <= 0) { 
+                   menuOptionSelected.find('.expandable').find('.info_title').html("");
+                   menuOptionSelected.find('.expandable').find('.available_spaces').html("Lot Full");
+                } else {
+                   menuOptionSelected.find('.expandable').find('.available_spaces').html(availableSpaces);
+                   menuOptionSelected.find('.expandable').find('.info_title').html("Available Spaces");
+                }
+
                 spacesColorChange(menuOptionSelected, availableSpaces);
             }
         };
