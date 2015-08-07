@@ -1,7 +1,6 @@
 body {
         font-size: 3rem;
         font-family: arial, verdana;
-        overflow: hidden;
 }
 
 .hidden {
@@ -76,12 +75,12 @@ and (min-device-width : 320px)
 and (max-device-width : 480px)
 and (orientation: portrait) {
 
-    .menu,.info {
-        width: 80% !important;
+    .available-spaces {
+        font-size: 10rem;
     }
-    .content {
-        margin-top: 50%;
-    }
+    .menu,.info,.logo,.logo-image {
+        width: 100% !important;
+    }   
 
 }
 
