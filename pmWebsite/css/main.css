@@ -27,7 +27,7 @@ body {
         margin-top: 15px;
 }
 
-.menu div[data-choice]:hover {
+.menu div[data-choice]:not(.expanded):hover {
         border-color: #0099CC;
 }
 
