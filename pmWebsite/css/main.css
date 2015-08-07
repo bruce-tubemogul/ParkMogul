@@ -65,9 +65,6 @@ and (max-device-width : 480px) {
     .content {
         margin-top: inherit;
     }
-    body {
-        overflow: auto;
-    }
 }
 
 @media only screen
