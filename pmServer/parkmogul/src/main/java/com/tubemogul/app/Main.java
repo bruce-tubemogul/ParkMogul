@@ -6,20 +6,19 @@ import io.dropwizard.setup.Environment;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 
 
 
 public class Main extends Application<ParkMogulConfiguration> {
     private int totalSpotsAvailable;
-
-    public int numberCars = 0;
+    private Cars cars = new Cars();
 
     @Override
     public void run(ParkMogulConfiguration conf, Environment env) throws Exception {
         totalSpotsAvailable = conf.parkingCapacity;
 
-        env.jersey().register(new CarArriving());
-        env.jersey().register(new CarLeaving());
+        env.jersey().register(new CarSeen());
         env.jersey().register(new AvailableSpots());
     }
 
@@ -27,25 +26,13 @@ public class Main extends Application<ParkMogulConfiguration> {
         new Main().run(args);
     }
 
-    @Path("/car-arriving")
-    public class CarArriving {
+    @Path("/car-seen")
+    public class CarSeen {
 
         @POST
-        public void post() {
-            numberCars++;
-        }
-    }
-
-    @Path("/car-leaving")
-    public class CarLeaving {
-
-        @POST
-        public void post() {
-            if (numberCars <= 0) {
-                throw new RuntimeException("There are no cars in, no one can leave!");
-            } else {
-                numberCars--;
-            }
+        public int carSeen(@QueryParam("plate") String plate) {
+            cars.put(plate);
+            return 0;
         }
     }
 
@@ -55,7 +42,7 @@ public class Main extends Application<ParkMogulConfiguration> {
 
         @GET
         public int get() {
-            return Math.max(totalSpotsAvailable - numberCars, 0);
+            return Math.max(totalSpotsAvailable - cars.total(), 0);
         }
     }
 }
